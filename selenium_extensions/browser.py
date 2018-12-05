@@ -1,6 +1,7 @@
 """
 Generalized browser module for selenium web driver
 """
+import time
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -84,3 +85,7 @@ class Browser(webdriver.Chrome):
             EC.presence_of_element_located((By.XPATH, xpath))
         )
         return self.find_elements_by_xpath(xpath)
+
+    def __exit__(self, *args, **kwargs):
+        time.sleep(2)
+        super().__exit__(self, *args, **kwargs)
