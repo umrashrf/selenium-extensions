@@ -11,7 +11,7 @@ from . import settings
 from .web_element import WebElement
 
 
-class Browser(webdriver.Firefox):
+class Browser(webdriver.Chrome):
     """
     Generalized Browser class
 
