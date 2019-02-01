@@ -22,14 +22,13 @@ class Browser(webdriver.Chrome):
     _web_element_cls = WebElement
 
     def __init__(self, *args, **kwargs):
-        capabilities = {'browserName': 'chrome',
-                        'chromeOptions':  {
-                            'useAutomationExtension': False,
-                            'forceDevToolsScreenshot': True,
-                            'args': ['--start-maximized',
-                                     '--disable-infobars']}}
-        kwargs.update({'desired_capabilities': capabilities})
         self.timeout = settings.SELENIUM_ELEMENT_TIMEOUT
+        if 'chrome_options' in kwargs:
+            options = kwargs['chrome_options']
+        else:
+            options = webdriver.ChromeOptions()
+        options.add_argument("--start-maximized")
+        kwargs['chrome_options'] = options
         super().__init__(*args, **kwargs)
 
     def css(self, *args, **kwargs):
